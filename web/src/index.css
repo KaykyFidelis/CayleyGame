@@ -2,6 +2,14 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   background-color: #749DF5;
 }
+a {
+  color: white;
+  text-decoration: none;
+}
+a:hover {
+  color: #749DF5;
+  text-decoration: none;
+}
 h3, img {
   margin-top: 2%;
   display:inline;
@@ -20,8 +28,8 @@ img{
   top: 1%;
 }
 div#centro{
-  width: 550px;
-  height: 400px;
+  width: 42%;
+  height: 63%;
   background: #6187DA;
   border-radius: 10px;
   position: absolute;
@@ -110,4 +118,75 @@ input.error, textarea.error {
 }
 .flex-between button {
   display: inline;
+}
+h1#titleSelectMode{
+  align-items: center;
+  color:white;
+  position: absolute;
+  left: 46%;
+  top: 6%;
+}
+div#centroGrupos {
+  width: 30%;
+  height: 63%;
+  background: #6187DA;
+  border-radius: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+img#strawberryGrupos {
+  height: 12%;
+  position: absolute;
+  top: 10%;
+  left: 62%;
+}
+img#appleMangoGrupos {
+  height: 12%;
+  position: absolute;
+  top: 65%;
+  left: 35%;
+}
+h2#tituloJogo{
+  margin-top: 10%;
+  display: flex;
+  justify-content: center;
+  color: white;
+  font-size: 30px;
+}
+button#botaoFacil, button#botaoMedio, button#botaoDificil{
+  display:inline;
+  margin: 0 15px;
+  margin-top: 5%;
+  width: 50%;
+  height: 15%;
+  border-radius: 10px;
+  background-color: #F5BBD1;
+  color: white;
+  border: 0px;
+}
+div#centroAneis {
+  width: 30%;
+  height: 63%;
+  background: #6187DA;
+  border-radius: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+img#strawberryAneis {
+  height: 12%;
+  position: absolute;
+  top: 10%;
+  left: 62%;
+}
+img#appleMangoAneis {
+  height: 12%;
+  position: absolute;
+  top: 65%;
+  left: 35%;
 }
