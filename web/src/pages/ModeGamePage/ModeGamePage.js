@@ -1,4 +1,4 @@
-import { Link, routes } from '@redwoodjs/router'
+import { routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
 
 const ModeGamePage = () => {
@@ -6,17 +6,23 @@ const ModeGamePage = () => {
     <>
       <MetaTags title="ModeGame" description="ModeGame page" />
       <div id="container">
-        <a href={routes.modeGame()}><h3 id="barra_superior">atividade - fmcc II</h3></a>
+        <a href={routes.modeGame()}>
+          <h3 id="barra_superior">atividade - fmcc II</h3>
+        </a>
         <img src="/logo_ufcg.png" alt="logo"></img>
       </div>
 
       <div id="centro">
         <h1 id="tituloJogo">CayleyGame</h1>
         <button id="botao1" type="button">
-          <a href={routes.grupos()}><h2>Grupos</h2></a>
+          <a href={routes.grupos()}>
+            <h2>Grupos</h2>
+          </a>
         </button>
         <button id="botao2" type="button">
-        <a href={routes.aneis()}><h2>Anéis</h2></a>
+          <a href={routes.aneis()}>
+            <h2>Anéis</h2>
+          </a>
         </button>
       </div>
       <img id="apple_mango" src="/apple_mango.png" alt="logo"></img>

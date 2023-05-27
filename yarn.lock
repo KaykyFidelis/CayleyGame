@@ -4199,6 +4199,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@redwoodjs/auth@npm:5.2.2":
+  version: 5.2.2
+  resolution: "@redwoodjs/auth@npm:5.2.2"
+  dependencies:
+    "@babel/runtime-corejs3": 7.21.5
+    core-js: 3.30.2
+    react: 18.2.0
+  checksum: e4dde83907e3335083013ce7f9d8cf6441f5e4d30d59b273eaf9d9ae78cb096e482960bb71d2f3a0236a7842a5eb02c61dc17da622695b3acec831abb354055e
+  languageName: node
+  linkType: hard
+
 "@redwoodjs/auth@npm:5.2.3":
   version: 5.2.3
   resolution: "@redwoodjs/auth@npm:5.2.3"
@@ -4407,9 +4418,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@redwoodjs/forms@npm:5.2.3":
-  version: 5.2.3
-  resolution: "@redwoodjs/forms@npm:5.2.3"
+"@redwoodjs/forms@npm:5.2.2":
+  version: 5.2.2
+  resolution: "@redwoodjs/forms@npm:5.2.2"
   dependencies:
     "@babel/runtime-corejs3": 7.21.5
     core-js: 3.30.2
@@ -4418,7 +4429,7 @@ __metadata:
   peerDependencies:
     graphql: 16.6.0
     react: 18.2.0
-  checksum: 46017f45294fa86dcb5b72557c4a8d35deca235a8331263a152f5de3cbb72d72661bb0b74d6d4f36313fbe7d372398a44c05f28438845e31a8168881340b47be
+  checksum: 4d3b7e5fa21110156cd6b92832c133e1af55951476fe7cffa1cfec054d5481dcf94727d2d497def0ead717bbe390aed6bb2f5fa26f8dc5aae8f7730140b5ea02
   languageName: node
   linkType: hard
 
@@ -4532,6 +4543,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@redwoodjs/router@npm:5.2.2":
+  version: 5.2.2
+  resolution: "@redwoodjs/router@npm:5.2.2"
+  dependencies:
+    "@babel/runtime-corejs3": 7.21.5
+    "@reach/skip-nav": 0.18.0
+    "@redwoodjs/auth": 5.2.2
+    core-js: 3.30.2
+  peerDependencies:
+    react: 18.2.0
+    react-dom: 18.2.0
+  checksum: 05294e6bf7cb8dfbfdd2b71d5352368bd2b9265a42e9cdf03da147d1aeca7bfc470eed0720bcf559d52b05002df4c449d5e5d8a514750f2c8853452a129f8366
+  languageName: node
+  linkType: hard
+
 "@redwoodjs/router@npm:5.2.3":
   version: 5.2.3
   resolution: "@redwoodjs/router@npm:5.2.3"
@@ -4635,6 +4661,38 @@ __metadata:
     ts-toolbelt: 9.6.0
     whatwg-fetch: 3.6.2
   checksum: 9a8403ca6ee9253349f772483f030e16ef79e7d3acae92a6b855fe1a554291b32ba7a9260b0d7c7ee4eefedd163edaf489f144d3f188ca09dd26a84036a78572
+  languageName: node
+  linkType: hard
+
+"@redwoodjs/web@npm:5.2.2":
+  version: 5.2.2
+  resolution: "@redwoodjs/web@npm:5.2.2"
+  dependencies:
+    "@apollo/client": 3.7.14
+    "@babel/runtime-corejs3": 7.21.5
+    "@redwoodjs/auth": 5.2.2
+    core-js: 3.30.2
+    graphql: 16.6.0
+    graphql-tag: 2.12.6
+    react-helmet-async: 1.3.0
+    react-hot-toast: 2.4.1
+    stacktracey: 2.1.8
+    ts-toolbelt: 9.6.0
+  peerDependencies:
+    prop-types: 15.8.1
+    react: 18.2.0
+    react-dom: 18.2.0
+  bin:
+    build-storybook: dist/bins/build-storybook.js
+    cross-env: dist/bins/cross-env.js
+    msw: dist/bins/msw.js
+    redwood: dist/bins/redwood.js
+    rw: dist/bins/redwood.js
+    rwfw: dist/bins/rwfw.js
+    start-storybook: dist/bins/start-storybook.js
+    tsc: dist/bins/tsc.js
+    webpack: dist/bins/webpack.js
+  checksum: d59355aaafdf1df90d269ffb02beee4bd46415cfd4057c7e5eeee51fc523d01862369fb682e9ad9a09ce76925d05fe2573c5b291f5accd6d0e16c03f07fcd614
   languageName: node
   linkType: hard
 
@@ -24006,9 +24064,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "web@workspace:web"
   dependencies:
-    "@redwoodjs/forms": 5.2.3
-    "@redwoodjs/router": 5.2.3
-    "@redwoodjs/web": 5.2.3
+    "@redwoodjs/forms": 5.2.2
+    "@redwoodjs/router": 5.2.2
+    "@redwoodjs/web": 5.2.2
+    humanize-string: 2.1.0
     prop-types: 15.8.1
     react: 18.2.0
     react-dom: 18.2.0
