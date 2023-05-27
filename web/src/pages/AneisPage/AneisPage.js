@@ -18,17 +18,17 @@ const AneisPage = () => {
       <div id="centroAneis">
         <h2 id="tituloJogo">Selecione o nível do jogo</h2>
         <button id="botaoFacil" type="button">
-          <a href={routes.aneis()}>
+          <a href={routes.aneisPartida({ dificuldade: 'facil' })}>
             <h2>Fácil</h2>
           </a>
         </button>
         <button id="botaoMedio" type="button">
-          <a href={routes.aneis()}>
+          <a href={routes.aneisPartida({ dificuldade: 'medio' })}>
             <h2>Médio</h2>
           </a>
         </button>
         <button id="botaoDificil" type="button">
-          <a href={routes.aneis()}>
+          <a href={routes.aneisPartida({ dificuldade: 'dificil' })}>
             <h2>Dificil</h2>
           </a>
         </button>

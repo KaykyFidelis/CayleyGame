@@ -1,20 +1,25 @@
-import { Link, routes } from '@redwoodjs/router'
+import { routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
 
-const AneisPartidaPage = () => {
+const AneisPartidaPage = ({ dificuldade }) => {
   return (
     <>
       <MetaTags title="AneisPartida" description="AneisPartida page" />
+      <div id="container">
+        <a href={routes.modeGame()}>
+          <h3 id="barra_superior">atividade - fmcc II</h3>
+        </a>
+        <img src="/logo_ufcg.png" alt="logo"></img>
+      </div>
 
-      <h1>AneisPartidaPage</h1>
-      <p>
-        Find me in{' '}
-        <code>./web/src/pages/AneisPartidaPage/AneisPartidaPage.js</code>
-      </p>
-      <p>
-        My default route is named <code>aneisPartida</code>, link to me with `
-        <Link to={routes.aneisPartida()}>AneisPartida</Link>`
-      </p>
+      <div id="centro">
+        <h1 id="tituloJogo">CayleyGame</h1>
+        <h3 id="temporarioRemoverIndexCss">
+          Tu escolheu o nível {dificuldade} pow
+        </h3>
+      </div>
+      <img id="apple_mango" src="/apple_mango.png" alt="logo"></img>
+      <img id="strawberry" src="/strawberry.png" alt="logo"></img>
     </>
   )
 }
