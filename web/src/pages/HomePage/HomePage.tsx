@@ -6,11 +6,21 @@ const HomePage = () => {
     <>
       <MetaTags title="Home" description="Home page" />
 
-      <h1>HomePage</h1>
-      <p>Hello World JS!</p>
-      <li>
-        <Link to={routes.modeGame()}>ModeGame</Link>
-      </li>
+      <div id="centro">
+        <h1 id="tituloJogo">CayleyGame</h1>
+        <button id="botao1" type="button">
+          <Link to={routes.grupos()}>
+            <h2>Grupos</h2>
+          </Link>
+        </button>
+        <button id="botao2" type="button">
+          <Link to={routes.aneis()}>
+            <h2>Anéis</h2>
+          </Link>
+        </button>
+      </div>
+      <img id="apple_mango" src="/apple_mango.png" alt="logo"></img>
+      <img id="strawberry" src="/strawberry.png" alt="logo"></img>
     </>
   )
 }

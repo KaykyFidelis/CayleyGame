@@ -19,9 +19,8 @@ const Routes = () => {
         <Route path="/grupos-partida" page={GruposPartidaPage} name="gruposPartida" />
         <Route path="/aneis" page={AneisPage} name="aneis" />
         <Route path="/grupos" page={GruposPage} name="grupos" />
-        <Route path="/ModeGamePage" page={ModeGamePage} name="modeGame" />
+        <Route path="/" page={HomePage} name="home" />
       </Set>
-      <Route path="/" page={HomePage} name="home" />
       <Route notfound page={NotFoundPage} />
     </Router>
   )

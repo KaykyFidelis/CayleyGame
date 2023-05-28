@@ -9,8 +9,8 @@ const CayleyGamePageLayout = ({ children }: CayleyGamePageLayoutProps) => {
     <>
       <header>
         <div id="container">
-          <Link to={routes.modeGame()}>
-            <h3 id="barra_superior">atividade - fmcc II</h3>
+          <Link to={routes.home()}>
+            <h3 id="barra_superior">Atividade - FMCC II</h3>
           </Link>
           <img src="/logo_ufcg.png" alt="logo"></img>
         </div>
