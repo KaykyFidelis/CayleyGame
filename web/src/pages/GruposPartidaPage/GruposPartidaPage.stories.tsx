@@ -1,7 +1,7 @@
 import GruposPartidaPage from './GruposPartidaPage'
 
 export const generated = () => {
-  return <GruposPartidaPage />
+  return <GruposPartidaPage dificuldade="facil" />
 }
 
 export default {
