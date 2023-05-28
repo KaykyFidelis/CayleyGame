@@ -1,7 +1,7 @@
 import { routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
 
-const GruposPartidaPage = ({ dificuldade }) => {
+const GruposPartidaPage = ({ dificuldade }: { dificuldade: string }) => {
   if (dificuldade === 'facil') {
     return (
       <>

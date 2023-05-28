@@ -1,7 +1,7 @@
 import AneisPartidaPage from './AneisPartidaPage'
 
 export const generated = () => {
-  return <AneisPartidaPage />
+  return <AneisPartidaPage dificuldade="facil" />
 }
 
 export default {

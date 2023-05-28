@@ -1,14 +1,14 @@
 import { render } from '@redwoodjs/testing/web'
 
-import AneisPartidaPage from './AneisPartidaPage'
+import GruposPartidaPage from './GruposPartidaPage'
 
 //   Improve this test with help from the Redwood Testing Doc:
 //   https://redwoodjs.com/docs/testing#testing-pages-layouts
 
-describe('AneisPartidaPage', () => {
+describe('GruposPartidaPage', () => {
   it('renders successfully', () => {
     expect(() => {
-      render(<AneisPartidaPage />)
+      render(<GruposPartidaPage dificuldade="facil" />)
     }).not.toThrow()
   })
 })
