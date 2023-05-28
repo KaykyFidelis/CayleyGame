@@ -1,4 +1,4 @@
-import { routes, Link } from '@redwoodjs/router'
+import Header from 'src/components/Header/Header'
 
 type CayleyGamePageLayoutProps = {
   children?: React.ReactNode
@@ -7,14 +7,7 @@ type CayleyGamePageLayoutProps = {
 const CayleyGamePageLayout = ({ children }: CayleyGamePageLayoutProps) => {
   return (
     <>
-      <header>
-        <div id="container">
-          <Link to={routes.home()}>
-            <h3 id="barra_superior">Atividade - FMCC II</h3>
-          </Link>
-          <img src="/logo_ufcg.png" alt="logo"></img>
-        </div>
-      </header>
+      <Header title="Atividade FMCC II" />
       <main>{children}</main>
     </>
   )
