@@ -6,13 +6,6 @@ const AneisPage = () => {
     <>
       <MetaTags title="Aneis" description="Aneis page" />
 
-      <div id="container">
-        <a href={routes.modeGame()}>
-          <h3 id="barra_superior">atividade - fmcc II</h3>
-        </a>
-        <img src="/logo_ufcg.png" alt="logo"></img>
-      </div>
-
       <h1 id="titleSelectMode">Aneis</h1>
 
       <div id="centroAneis">

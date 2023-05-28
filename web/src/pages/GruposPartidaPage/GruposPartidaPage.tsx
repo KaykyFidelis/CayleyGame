@@ -7,13 +7,6 @@ const GruposPartidaPage = ({ dificuldade }: { dificuldade: string }) => {
       <>
         <MetaTags title="GruposPartida" description="GruposPartida page" />
 
-        <div id="container">
-          <a href={routes.modeGame()}>
-            <h3 id="barra_superior">atividade - fmcc II</h3>
-          </a>
-          <img src="/logo_ufcg.png" alt="logo"></img>
-        </div>
-
         <div id="centro">
           <h1 id="tituloJogo">CayleyGame</h1>
           <h3 id="temporarioRemoverIndexCss">

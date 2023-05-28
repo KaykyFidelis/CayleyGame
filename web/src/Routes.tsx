@@ -7,16 +7,20 @@
 // 'src/pages/HomePage/HomePage.js'         -> HomePage
 // 'src/pages/Admin/BooksPage/BooksPage.js' -> AdminBooksPage
 
-import { Router, Route } from '@redwoodjs/router'
+import { Router, Route, Set } from '@redwoodjs/router'
+
+import CayleyGamePageLayout from './layouts/CayleyGamePageLayout/CayleyGamePageLayout'
 
 const Routes = () => {
   return (
     <Router>
-      <Route path="/aneis-partida" page={AneisPartidaPage} name="aneisPartida" />
-      <Route path="/grupos-partida" page={GruposPartidaPage} name="gruposPartida" />
-      <Route path="/aneis" page={AneisPage} name="aneis" />
-      <Route path="/grupos" page={GruposPage} name="grupos" />
-      <Route path="/ModeGamePage" page={ModeGamePage} name="modeGame" />
+      <Set wrap={CayleyGamePageLayout}>
+        <Route path="/aneis-partida" page={AneisPartidaPage} name="aneisPartida" />
+        <Route path="/grupos-partida" page={GruposPartidaPage} name="gruposPartida" />
+        <Route path="/aneis" page={AneisPage} name="aneis" />
+        <Route path="/grupos" page={GruposPage} name="grupos" />
+        <Route path="/ModeGamePage" page={ModeGamePage} name="modeGame" />
+      </Set>
       <Route path="/" page={HomePage} name="home" />
       <Route notfound page={NotFoundPage} />
     </Router>
