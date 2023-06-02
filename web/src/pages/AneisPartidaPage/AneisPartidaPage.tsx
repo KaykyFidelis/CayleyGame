@@ -1,7 +1,7 @@
 import { routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
 
-const AneisPartidaPage = ({ dificuldade }) => {
+const AneisPartidaPage = ({ dificuldade }: { dificuldade: string }) => {
   return (
     <>
       <MetaTags title="AneisPartida" description="AneisPartida page" />
