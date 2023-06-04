@@ -1,41 +1,23 @@
 import * as React from 'react'
-
-import AppBar from '@mui/material/AppBar'
-import Avatar from '@mui/material/Avatar'
-import Box from '@mui/material/Box'
-import Toolbar from '@mui/material/Toolbar'
-import Typography from '@mui/material/Typography'
-
+import Container from 'react-bootstrap/Container';
+import Form from 'react-bootstrap/Form';
+import Image from 'react-bootstrap/Image';
+import Navbar from 'react-bootstrap/Navbar';
 import { routes, Link } from '@redwoodjs/router'
+import { NavItem } from 'react-bootstrap';
 
 const Header = ({ title }: { title: string }) => {
   return (
-    <header>
-      <Box sx={{ flexGrow: 1 }}>
-        <AppBar
-          sx={{ bgcolor: 'transparent', boxShadow: 'none' }}
-          position="static"
-        >
-          <Toolbar>
-            <Box display="flex" flexGrow={1}>
-              <Link to={routes.home()}>
-                <Typography variant="h4" component="div" sx={{ flexGrow: 1 }}>
-                  {title}
-                </Typography>
-              </Link>
-            </Box>
-            <Avatar
-              alt="logo"
-              src="/logo_ufcg.png"
-              sx={{ bgcolor: 'transparent', width: 56, height: 56 }}
-            >
-              UFCG
-            </Avatar>
-          </Toolbar>
-        </AppBar>
-      </Box>
-    </header>
-  )
+    <Navbar style={{ backgroundColor: '#749DF5', }} expand="lg">
+      <Container fluid>
+        <Navbar.Brand className="text-light" href={routes.home()}>Atividade 2 - FMCCII</Navbar.Brand>
+        <NavItem>{ title }</NavItem>
+        <NavItem>
+          <Image src="\logo_ufcg.png" width={40} height={40}/>
+        </NavItem>
+      </Container>
+    </Navbar>
+  );
 }
 
 export default Header

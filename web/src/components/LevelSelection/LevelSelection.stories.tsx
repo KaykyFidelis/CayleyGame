@@ -4,8 +4,8 @@
 // ```tsx
 // import type { ComponentStory } from '@storybook/react'
 //
-// export const generated: ComponentStory<typeof TopBar> = (args) => {
-//   return <TopBar {...args} />
+// export const generated: ComponentStory<typeof LevelSelection> = (args) => {
+//   return <LevelSelection {...args} />
 // }
 // ```
 //
@@ -13,13 +13,13 @@
 
 import type { ComponentMeta } from '@storybook/react'
 
-import Header from './Header'
+import LevelSelection from './LevelSelection'
 
 export const generated = () => {
-  return <Header title={''} />
+  return <LevelSelection />
 }
 
 export default {
-  title: 'Components/Header',
-  component: Header,
-} as ComponentMeta<typeof Header>
+  title: 'Components/LevelSelection',
+  component: LevelSelection,
+} as ComponentMeta<typeof LevelSelection>

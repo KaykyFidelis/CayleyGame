@@ -7,7 +7,7 @@ type CayleyGamePageLayoutProps = {
 const CayleyGamePageLayout = ({ children }: CayleyGamePageLayoutProps) => {
   return (
     <>
-      <Header title="Atividade FMCC II" />
+      <Header title={''} />
       <main>{children}</main>
     </>
   )

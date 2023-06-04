@@ -1,20 +1,25 @@
-import { Button } from '@mui/material'
+import React from 'react';
+import { Button } from 'react-bootstrap';
 
-const ButtonLink = ({ route, value }: { route: string; value: string }) => {
+const ButtonLink = ({ route, value, className }) => {
   return (
     <Button
-      sx={{
-        bgcolor: '#F5BBD1',
-        typography: 'h4',
+      style={{
+        backgroundColor: '#F5BBD1',
+        fontSize: '1.5rem',
         textTransform: 'capitalize',
-        borderRadius: 5,
+        borderRadius: '5px',
+        color: 'white',
+        height: '100%',
+        width: '90%',
       }}
       href={route}
       variant="contained"
+      className={ className }
     >
       {value}
     </Button>
-  )
-}
+  );
+};
 
-export default ButtonLink
+export default ButtonLink;

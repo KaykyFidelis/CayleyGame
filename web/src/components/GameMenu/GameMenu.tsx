@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Grid, Box } from '@mui/material'
+import { Col, Container, Image } from 'react-bootstrap';
 
 import { routes } from '@redwoodjs/router'
 
@@ -8,40 +8,23 @@ import ButtonLink from '../ButtonLink/ButtonLink'
 
 const GameMenu = () => {
   return (
-    <Grid
-      container
-      justifyContent="center"
-      alignItems="center"
-      minHeight="85vh"
-    >
-      <Grid item xs={12} sm={6} md={4}>
-        <Box
-          bgcolor="#6187DA"
-          borderRadius={10}
-          display="flex"
-          flexDirection="column"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <Grid container justifyContent="center" spacing={6} mt={2} mb={5}>
-            <Grid item>
-              <Box sx={{ typography: 'h4' }} color="white">
-                CayleyGame
-              </Box>
-            </Grid>
-          </Grid>
-
-          <Grid container justifyContent="center" spacing={6} mt={5} mb={5}>
-            <Grid item>
-              <ButtonLink route={routes.grupos()} value="Grupos" />
-            </Grid>
-            <Grid item>
-              <ButtonLink route={routes.aneis()} value="Anéis" />
-            </Grid>
-          </Grid>
-        </Box>
-      </Grid>
-    </Grid>
+    <div className="d-flex align-items-center justify-content-center" style={{ height: '92vh' }}>
+      <Container className="position-relative d-flex flex-column align-items-center justify-content-center" style={{ backgroundColor: '#6187DA', width: '50%', height: '70%', borderRadius: '10px' }}>
+        <Image src="/strawberry.png" alt="Logo" className="position-absolute top-0 end-0" style={{ width: '10%' }} />
+        <Image src="/apple_mango.png" alt="Logo" className="position-absolute bottom-2 start-0" style={{ width: '24%' }} />
+        <div className="mt-10">
+          <h1 className="text-center text-white" style={{ fontSize: '3rem' }}>CayleyGame</h1>
+        </div>
+        <div className="d-flex align-items-center justify-content-center" style={{ height: '100%', width: '80%' }}>
+          <Col className="d-flex align-items-center justify-content-center w-100 h-25">
+            <ButtonLink route={routes.grupos()} value="Grupos" className={"d-flex align-items-center justify-content-center"}/>
+          </Col>
+          <Col className="d-flex align-items-center justify-content-center w-100 h-25">
+            <ButtonLink route={routes.aneis()} value="Anéis" className={"d-flex align-items-center justify-content-center"}/>
+          </Col>
+        </div>
+      </Container>
+    </div>
   )
 }
 

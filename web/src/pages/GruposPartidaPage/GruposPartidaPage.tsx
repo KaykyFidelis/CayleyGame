@@ -6,13 +6,11 @@ const GruposPartidaPage = ({ dificuldade }: { dificuldade: string }) => {
       <MetaTags title="GruposPartida" description="GruposPartida page" />
 
       <div id="centro">
-        <h1 id="tituloJogo">CayleyGame</h1>
+        <h1 id="tituloJogo">Grupos</h1>
         <h3 id="temporarioRemoverIndexCss">
           Tu escolheu o nível {dificuldade} pow
         </h3>
       </div>
-      <img id="apple_mango" src="/apple_mango.png" alt="logo"></img>
-      <img id="strawberry" src="/strawberry.png" alt="logo"></img>
     </>
   )
 }
