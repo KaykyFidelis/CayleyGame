@@ -1,10 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Image } from 'react-bootstrap';
 
-const Square = ({ id }) => {
+const Square = ({ padrao, frutaAtual }) => {
+  const [selectedImage, setSelectedImage] = useState(`${padrao}`);
+
+  const handleSquareClick = (squareId) => {
+    setSelectedImage(squareId);
+  };
+
   return (
-    <td style={{ backgroundColor: '#6187DA' }}>
-      <div style={{ width: '100%', height: '100%', backgroundColor: '#F5BBD1', borderRadius: '5%',color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        {id}
+    <td style={{ backgroundColor: '#6187DA', width: '10%', height: '10%' }}>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: '100%',
+          height: '100%',
+          backgroundColor: '#F5BBD1',
+          borderRadius: '5%',
+        }}
+        onClick={() => handleSquareClick(frutaAtual)}
+      >
+        <Image
+          src={`/frutas/${selectedImage}.png`}
+          alt="Atual"
+          style={{ maxWidth: '65%', maxHeight: '65%' }}
+        />
       </div>
     </td>
   );
