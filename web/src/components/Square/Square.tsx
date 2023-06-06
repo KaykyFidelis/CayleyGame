@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Image } from 'react-bootstrap';
 
-const Square = ({ padrao, frutaAtual }) => {
+const Square = ({ cor, padrao, frutaAtual }) => {
   const [selectedImage, setSelectedImage] = useState(`${padrao}`);
 
   const handleSquareClick = (squareId) => {
@@ -17,7 +17,7 @@ const Square = ({ padrao, frutaAtual }) => {
           justifyContent: 'center',
           width: '100%',
           height: '100%',
-          backgroundColor: '#F5BBD1',
+          backgroundColor: `${cor}`,
           borderRadius: '5%',
         }}
         onClick={() => handleSquareClick(frutaAtual)}

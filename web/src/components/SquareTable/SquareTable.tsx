@@ -52,12 +52,16 @@ const SquareTable = ({ size }) => {
 
   const renderTable = ({ size }) => {
     const rows = [];
+    let cor;
     for (let i = 0; i < size; i++) {
       const columns = [];
       for (let j = 0; j < size; j++) {
         const squareNumber = i * size + j;
-      {/*mudar o padrao para um valor do bd na tabela*/}
-        columns.push(<Square padrao={1} frutaAtual={selectedImage}/>);
+        let cor = "#F5BBD1";
+        if ((j == 0 ) || (i == 0)) {
+          cor = "#FF8CB8";
+        }
+        columns.push(<Square cor={cor} padrao={6} frutaAtual={selectedImage}/>);
       }
       rows.push(<tr key={i}>{columns}</tr>);
     }
@@ -80,7 +84,7 @@ const SquareTable = ({ size }) => {
         style={{ backgroundColor: '#6187DA', width: '10%', height: '75%', borderRadius: '10px', marginLeft: '1rem' }}
       >
         <Container className="d-flex flex-column align-items-center" style={{ backgroundColor: '#6187DA', width: '100%', height: '100%', borderRadius: '10px' }}>
-          <h1 className="text-white mt-3">OPA</h1>
+          <h1 className="text-white text-center mt-3">Fruta Selecionada</h1>
           <Image src={`/frutas/${selectedImage}.png`} alt="Atual" style={{ width: '100%' }} />
         </Container>
         {renderImages({ size })}
