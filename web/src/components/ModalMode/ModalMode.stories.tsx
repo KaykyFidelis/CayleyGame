@@ -4,8 +4,8 @@
 // ```tsx
 // import type { ComponentStory } from '@storybook/react'
 //
-// export const generated: ComponentStory<typeof ButtonLink> = (args) => {
-//   return <ButtonLink {...args} />
+// export const generated: ComponentStory<typeof ModalMode> = (args) => {
+//   return <ModalMode {...args} />
 // }
 // ```
 //
@@ -13,13 +13,13 @@
 
 import type { ComponentMeta } from '@storybook/react'
 
-import ButtonLink from './ButtonLink'
+import ModalMode from './ModalMode'
 
 export const generated = () => {
-  return <ButtonLink value={undefined} className={undefined} route={undefined} />
+  return <ModalMode />
 }
 
 export default {
-  title: 'Components/ButtonLink',
-  component: ButtonLink,
-} as ComponentMeta<typeof ButtonLink>
+  title: 'Components/ModalMode',
+  component: ModalMode,
+} as ComponentMeta<typeof ModalMode>
