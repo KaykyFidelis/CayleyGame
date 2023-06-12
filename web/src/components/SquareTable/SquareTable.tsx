@@ -135,7 +135,9 @@ const SquareTable = ({ size, rowCol }) => {
         }, 150)
       }
     }
-    if (temAssociatividade && temInversos) console.log('Você venceu!')
+    if (temAssociatividade && temInversos){
+      console.log('Você venceu!')
+    }
   }
 
   const handleImageClick = (imageName) => {
@@ -144,7 +146,6 @@ const SquareTable = ({ size, rowCol }) => {
 
   const renderImages = ({ size }) => {
     const images = []
-
     // Loop para gerar as imagens
     for (let i = 1; i < size; i += 2) {
       const image1 = (
@@ -185,25 +186,61 @@ const SquareTable = ({ size, rowCol }) => {
           {image2}
         </Row>
       )
-
       images.push(imageGroup)
     }
+
+    const image3 = (
+      <Col
+        className="d-flex align-items-center justify-content-center mb-3"
+        key={`${size+1}`}
+      >
+        <Image
+          src={`/frutas/${size}.png`}
+          alt={`Image ${size}`}
+          style={{ width: '50%' }}
+          fluid
+          onClick={() => handleImageClick(`${size}`)}
+        />
+      </Col>
+    )
+
+    const imageGroup2 = (
+      <Row
+        className="d-flex align-items-end justify-content-center h-20"
+        key={`image-group-${size}`}
+      >
+        {image3}
+      </Row>
+    )
+    images.push(imageGroup2)
 
     return images
   }
 
   const renderTable = ({ size }) => {
-    const rows = []
-    for (let i = 0; i < size; i++) {
-      const columns = []
-      for (let j = 0; j < size; j++) {
-        const squareNumber = i * size + j
-        let cor = '#F5BBD1'
-        let value = 4
-        if ((j == rowCol || i == rowCol) && identidade == 'true') {
-          if (i == rowCol) value = j + 1
-          else if (j == rowCol) value = i + 1
-          cor = '#FF8CB8'
+    let rows = [];
+    for (let i = 0; i <= size; i++) { // Adiciona "i <= size" em vez de "i < size"
+      let columns = [];
+      for (let j = 0; j <= size; j++) { // Adiciona "j <= size" em vez de "j < size"
+        const squareNumber = i * size + j;
+        let cor = '#F5BBD1';
+        let value = 4;
+        if(i == 0 && j == 0) {
+          cor = '#FF8CB8';
+          columns.push(
+            <Square
+              cor={cor}
+              padrao={'logo_ufcg_padrao'}
+              frutaAtual={selectedImage}
+              onClick={handleSquareImageChange}
+              imageId={squareNumber}
+              disabled
+            />
+          );
+        }
+        if(i != 0 && j == 0) {
+          cor = '#FF8CB8';
+          value = i;
           columns.push(
             <Square
               cor={cor}
@@ -213,23 +250,68 @@ const SquareTable = ({ size, rowCol }) => {
               onClick={handleSquareImageChange}
               imageId={squareNumber}
             />
-          )
-        } else {
+          );
+        }
+        if(i == 0 && j !=0){
+          cor = '#FF8CB8';
+          value = j;
           columns.push(
             <Square
               cor={cor}
               padrao={value}
               frutaAtual={selectedImage}
+              disabled
               onClick={handleSquareImageChange}
               imageId={squareNumber}
             />
-          )
+          );
+        }
+        if ((j == rowCol || i == rowCol) && identidade == 'true' && (i != 0 && j != 0)) {
+          if (i == rowCol) {
+            cor = '#87FF9A';
+            value = j;
+            columns.push(
+              <Square
+                cor={cor}
+                padrao={value}
+                frutaAtual={selectedImage}
+                disabled
+                onClick={handleSquareImageChange}
+                imageId={squareNumber}
+              />
+            );
+          }
+          else if (j == rowCol) {
+            cor = '#87FF9A';
+            value = i;
+            columns.push(
+              <Square
+                cor={cor}
+                padrao={value}
+                frutaAtual={selectedImage}
+                disabled
+                onClick={handleSquareImageChange}
+                imageId={squareNumber}
+              />
+            );
+          }
+        } else if(i != 0 && j!=0){
+          columns.push(
+          <Square
+            cor={cor}
+            padrao={value}
+            frutaAtual={selectedImage}
+            onClick={handleSquareImageChange}
+            imageId={squareNumber}
+          />
+          );
         }
       }
-      rows.push(<tr key={i}>{columns}</tr>)
+      rows.push(<tr key={i}>{columns}</tr>);
     }
-    return rows
-  }
+    return rows;
+  };
+
 
   return (
     <div

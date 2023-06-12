@@ -8,13 +8,13 @@ const GruposPartidaPage = ({ dificuldade }: { dificuldade: string }) => {
   let size = 0
   switch (dificuldade) {
     case 'facil':
-      size = 6
+      size = 5
       break
     case 'medio':
-      size = 8
+      size = 7
       break
     case 'dificil':
-      size = 10
+      size = 9
       break
   }
   return (
