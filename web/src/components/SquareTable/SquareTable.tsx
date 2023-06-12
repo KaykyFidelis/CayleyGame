@@ -1,7 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState } from 'react'
 
-import { chunk } from 'lodash'
-import _ from 'lodash'
 import { Container, Table, Col, Row, Image } from 'react-bootstrap'
 
 import { useParams } from '@redwoodjs/router'
@@ -33,14 +31,14 @@ function getPermutacoes(array, size) {
 function checaIdentidade(tableSize: number) {
   let rowSequence = true
   let columnSequence = true
-  for (let i = 0; i < tableSize; i++) {
+  for (let i = 1; i <= tableSize; i++) {
     rowSequence = true
     columnSequence = true
-    for (let j = 0; j < tableSize; j++) {
+    for (let j = 1; j <= tableSize; j++) {
       if (
         !document
           .getElementById('squareImage-' + (i * tableSize + j))
-          .src.endsWith(j + 1 + '.png')
+          .src.endsWith(j + '.png')
       ) {
         rowSequence = false
         break
@@ -49,7 +47,7 @@ function checaIdentidade(tableSize: number) {
       if (
         !document
           .getElementById('squareImage-' + (j * tableSize + i))
-          .src.endsWith(i + 1 + j + '.png')
+          .src.endsWith(i - 1 + j + '.png')
       ) {
         columnSequence = false
         break
@@ -62,7 +60,7 @@ function checaIdentidade(tableSize: number) {
 
 function checaAssociatividade(tableSize: number) {
   const frutas: number[] = []
-  for (let i = 0; i < tableSize; i++) frutas.push(i)
+  for (let i = 1; i <= tableSize; i++) frutas.push(i)
 
   const permutacoes: number[] = getPermutacoes(frutas, 3)
   for (const permutacao of permutacoes) {
@@ -74,7 +72,7 @@ function checaAssociatividade(tableSize: number) {
     const frutaABUrl: string = document.getElementById(
       'squareImage-' + resultadoAB
     ).src
-    const frutaAB = parseInt(frutaABUrl.at(frutaABUrl.length - 5), 10) - 1
+    const frutaAB = parseInt(frutaABUrl.at(frutaABUrl.length - 5), 10)
     const resultadoDireita: number = frutaAB * tableSize + frutaC
     const frutaResultadoDireitaUrl = document.getElementById(
       'squareImage-' + resultadoDireita
@@ -91,21 +89,19 @@ function checaAssociatividade(tableSize: number) {
 }
 
 function checaInversos(size, frutaIdentidade) {
-  for (let i = 0; i < size; i++) {
-    const frutaA = i
-    for (let j = 0; j < size; j++) {
-      const frutaB = j
+  for (let i = 1; i <= size; i++) {
+    for (let j = 1; j <= size; j++) {
       const frutaABUrl = document.getElementById(
         'squareImage-' + (i * size + j)
       ).src
-      const frutaAB = frutaABUrl.at(frutaABUrl.length - 5) - 1
+      const frutaAB = parseInt(frutaABUrl.at(frutaABUrl.length - 5))
 
       const frutaBAUrl = document.getElementById(
         'squareImage-' + (j * size + i)
       ).src
-      const frutaBA = frutaBAUrl.at(frutaBAUrl.length - 5) - 1
+      const frutaBA = parseInt(frutaBAUrl.at(frutaBAUrl.length - 5))
       if (frutaAB === frutaBA && frutaAB === frutaIdentidade) break
-      else if (j == size - 1) return false
+      else if (j == size) return false
     }
   }
   return true
@@ -124,6 +120,7 @@ const SquareTable = ({ size, rowCol }) => {
     if (identidade != 'true') {
       setTimeout(() => setFrutaIdentidade(checaIdentidade(size)), 250)
     }
+
     if (frutaIdentidade != -1) {
       setTimeout(() => {
         setInversos(checaInversos(size, frutaIdentidade))
@@ -135,8 +132,8 @@ const SquareTable = ({ size, rowCol }) => {
         }, 150)
       }
     }
-    if (temAssociatividade && temInversos){
-      console.log('Você venceu!')
+    if (temAssociatividade && temInversos) {
+      alert('Você venceu!')
     }
   }
 
@@ -192,7 +189,7 @@ const SquareTable = ({ size, rowCol }) => {
     const image3 = (
       <Col
         className="d-flex align-items-center justify-content-center mb-3"
-        key={`${size+1}`}
+        key={`${size + 1}`}
       >
         <Image
           src={`/frutas/${size}.png`}
@@ -218,15 +215,17 @@ const SquareTable = ({ size, rowCol }) => {
   }
 
   const renderTable = ({ size }) => {
-    let rows = [];
-    for (let i = 0; i <= size; i++) { // Adiciona "i <= size" em vez de "i < size"
-      let columns = [];
-      for (let j = 0; j <= size; j++) { // Adiciona "j <= size" em vez de "j < size"
-        const squareNumber = i * size + j;
-        let cor = '#F5BBD1';
-        let value = 4;
-        if(i == 0 && j == 0) {
-          cor = '#FF8CB8';
+    const rows = []
+    for (let i = 0; i <= size; i++) {
+      // Adiciona "i <= size" em vez de "i < size"
+      const columns = []
+      for (let j = 0; j <= size; j++) {
+        // Adiciona "j <= size" em vez de "j < size"
+        const squareNumber = i * size + j
+        let cor = '#F5BBD1'
+        let value = 4
+        if (i == 0 && j == 0) {
+          cor = '#FF8CB8'
           columns.push(
             <Square
               cor={cor}
@@ -236,11 +235,11 @@ const SquareTable = ({ size, rowCol }) => {
               imageId={squareNumber}
               disabled
             />
-          );
+          )
         }
-        if(i != 0 && j == 0) {
-          cor = '#FF8CB8';
-          value = i;
+        if (i != 0 && j == 0) {
+          cor = '#FF8CB8'
+          value = i
           columns.push(
             <Square
               cor={cor}
@@ -250,11 +249,11 @@ const SquareTable = ({ size, rowCol }) => {
               onClick={handleSquareImageChange}
               imageId={squareNumber}
             />
-          );
+          )
         }
-        if(i == 0 && j !=0){
-          cor = '#FF8CB8';
-          value = j;
+        if (i == 0 && j != 0) {
+          cor = '#FF8CB8'
+          value = j
           columns.push(
             <Square
               cor={cor}
@@ -264,12 +263,17 @@ const SquareTable = ({ size, rowCol }) => {
               onClick={handleSquareImageChange}
               imageId={squareNumber}
             />
-          );
+          )
         }
-        if ((j == rowCol || i == rowCol) && identidade == 'true' && (i != 0 && j != 0)) {
+        if (
+          (j == rowCol || i == rowCol) &&
+          identidade == 'true' &&
+          i != 0 &&
+          j != 0
+        ) {
           if (i == rowCol) {
-            cor = '#87FF9A';
-            value = j;
+            cor = '#87FF9A'
+            value = j
             columns.push(
               <Square
                 cor={cor}
@@ -279,11 +283,10 @@ const SquareTable = ({ size, rowCol }) => {
                 onClick={handleSquareImageChange}
                 imageId={squareNumber}
               />
-            );
-          }
-          else if (j == rowCol) {
-            cor = '#87FF9A';
-            value = i;
+            )
+          } else if (j == rowCol) {
+            cor = '#87FF9A'
+            value = i
             columns.push(
               <Square
                 cor={cor}
@@ -293,25 +296,24 @@ const SquareTable = ({ size, rowCol }) => {
                 onClick={handleSquareImageChange}
                 imageId={squareNumber}
               />
-            );
+            )
           }
-        } else if(i != 0 && j!=0){
+        } else if (i != 0 && j != 0) {
           columns.push(
-          <Square
-            cor={cor}
-            padrao={value}
-            frutaAtual={selectedImage}
-            onClick={handleSquareImageChange}
-            imageId={squareNumber}
-          />
-          );
+            <Square
+              cor={cor}
+              padrao={value}
+              frutaAtual={selectedImage}
+              onClick={handleSquareImageChange}
+              imageId={squareNumber}
+            />
+          )
         }
       }
-      rows.push(<tr key={i}>{columns}</tr>);
+      rows.push(<tr key={i}>{columns}</tr>)
     }
-    return rows;
-  };
-
+    return rows
+  }
 
   return (
     <div
