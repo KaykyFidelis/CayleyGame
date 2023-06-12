@@ -1,7 +1,16 @@
-import React from 'react';
-import { Button } from 'react-bootstrap';
+import React from 'react'
 
-const ButtonLink = ({ route, value, className }) => {
+import { Button } from 'react-bootstrap'
+
+const ButtonLink = ({
+  route,
+  value,
+  className,
+}: {
+  route: string
+  value: string
+  className: string
+}) => {
   return (
     <Button
       style={{
@@ -15,11 +24,11 @@ const ButtonLink = ({ route, value, className }) => {
       }}
       href={route}
       variant="contained"
-      className={ className }
+      className={className}
     >
       {value}
     </Button>
-  );
-};
+  )
+}
 
-export default ButtonLink;
+export default ButtonLink

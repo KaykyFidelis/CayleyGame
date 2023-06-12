@@ -31,6 +31,7 @@
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.13.3",
     "bootstrap": "^5.3.0",
+    "lodash": "^4.17.21",
     "react-bootstrap": "^2.7.4"
   }
 }
