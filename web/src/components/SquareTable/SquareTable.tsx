@@ -6,7 +6,12 @@ import { useParams } from '@redwoodjs/router'
 
 import Square from '../Square/Square'
 
-function getPermutacoes(array: number[], tamanhoArray: number) {
+type SquareTableProps = {
+  size: number
+  rowCol: number
+}
+
+const getPermutacoes = (array: number[], tamanhoArray: number): number[][] => {
   const results: number[][] = []
 
   function permutar(permutacaoAtual: number[], elementosRestantes: number[]) {
@@ -26,7 +31,7 @@ function getPermutacoes(array: number[], tamanhoArray: number) {
   return results
 }
 
-function checaIdentidade(tamanhoTabela: number) {
+const checaIdentidade = (tamanhoTabela: number): number => {
   for (let i = 1; i <= tamanhoTabela; i++) {
     let sequenciaLinhaCorreta = true
     let sequenciaColunaCorreta = true
@@ -60,7 +65,7 @@ function checaIdentidade(tamanhoTabela: number) {
   return -1
 }
 
-function checaAssociatividade(tamanhoTabela: number) {
+const checaAssociatividade = (tamanhoTabela: number): boolean => {
   const frutas = Array.from(
     { length: tamanhoTabela },
     (_, indice) => indice + 1
@@ -76,7 +81,7 @@ function checaAssociatividade(tamanhoTabela: number) {
       'squareImage-' + resultadoAB
     ) as HTMLImageElement
     const frutaABSrc = frutaABImagem.src
-    const frutaAB = parseInt(frutaABSrc.at(frutaABSrc.length - 5), 10)
+    const frutaAB = +frutaABSrc.charAt(frutaABSrc.length - 5)
 
     const resultadoDireita = frutaAB * tamanhoTabela + frutaC
     const frutaResultadoDireitaImagem = document.getElementById(
@@ -95,22 +100,25 @@ function checaAssociatividade(tamanhoTabela: number) {
   return true
 }
 
-function checaInversos(tamanhoTabela: number, frutaIdentidade: number) {
+const checaInversos = (
+  tamanhoTabela: number,
+  frutaIdentidade: number
+): boolean => {
   for (let i = 1; i <= tamanhoTabela; i++) {
     for (let j = 1; j <= tamanhoTabela; j++) {
       const frutaABImagem = document.getElementById(
-        'squareImage-' + (i * tamanhoTabela + j)
+        `squareImage-${i * tamanhoTabela + j}`
       ) as HTMLImageElement
       const frutaABSrc = frutaABImagem.src
 
-      const frutaAB = parseInt(frutaABSrc.at(frutaABSrc.length - 5))
+      const frutaAB = +frutaABSrc.charAt(frutaABSrc.length - 5)
 
       const frutaBAImagem = document.getElementById(
-        'squareImage-' + (j * tamanhoTabela + i)
+        `squareImage-${j * tamanhoTabela + i}`
       ) as HTMLImageElement
       const frutaBASrc = frutaBAImagem.src
 
-      const frutaBA = parseInt(frutaBASrc.at(frutaBASrc.length - 5))
+      const frutaBA = +frutaBASrc.at(frutaBASrc.length - 5)
       if (frutaAB === frutaBA && frutaAB === frutaIdentidade) break
       else if (j === tamanhoTabela) return false
     }
@@ -118,7 +126,7 @@ function checaInversos(tamanhoTabela: number, frutaIdentidade: number) {
   return true
 }
 
-function checaCancelamento(tamanhoTabela: number) {
+function checaCancelamento(tamanhoTabela: number): boolean {
   const linhas: Set<number>[] = []
   const colunas: Set<number>[] = []
 
@@ -128,16 +136,16 @@ function checaCancelamento(tamanhoTabela: number) {
 
     for (let j = 1; j <= tamanhoTabela; j++) {
       const frutaLinhaImagem = document.getElementById(
-        'squareImage-' + (i * tamanhoTabela + j)
+        `squareImage-${i * tamanhoTabela + j}`
       ) as HTMLImageElement
       const frutaLinhaSrc = frutaLinhaImagem.src
-      const frutaLinha = parseInt(frutaLinhaSrc.at(frutaLinhaSrc.length - 5))
+      const frutaLinha = +frutaLinhaSrc.at(frutaLinhaSrc.length - 5)
 
       const frutaColunaImagem = document.getElementById(
-        'squareImage-' + (j * tamanhoTabela + i)
+        `squareImage-${j * tamanhoTabela + i}`
       ) as HTMLImageElement
       const frutaColunaSrc = frutaColunaImagem.src
-      const frutaColuna = parseInt(frutaColunaSrc.at(frutaColunaSrc.length - 5))
+      const frutaColuna = +frutaColunaSrc.at(frutaColunaSrc.length - 5)
 
       linha.add(frutaLinha)
       coluna.add(frutaColuna)
@@ -156,7 +164,7 @@ function checaCancelamento(tamanhoTabela: number) {
   return true
 }
 
-const SquareTable = ({ size, rowCol }: { size: number; rowCol: number }) => {
+const SquareTable = ({ size, rowCol }: SquareTableProps) => {
   const [selectedImage, setSelectedImage] = useState('1')
   const { identidade } = useParams()
   const [frutaIdentidade, setFrutaIdentidade] = useState(
@@ -240,7 +248,7 @@ const SquareTable = ({ size, rowCol }: { size: number; rowCol: number }) => {
   const verificaInverso = () => {
     let saida1
     let saida2
-    if (temInversos === true) {
+    if (temInversos) {
       saida1 = `/yes.png`
       saida2 = 'Os inversos obedecem à propriedade'
     } else {
@@ -360,7 +368,7 @@ const SquareTable = ({ size, rowCol }: { size: number; rowCol: number }) => {
         const squareNumber = i * size + j
         let cor = '#F5BBD1'
         let value = 4
-        if (i == 0 && j == 0) {
+        if (i === 0 && j === 0) {
           cor = '#FF8CB8'
           columns.push(
             <Square
@@ -373,7 +381,7 @@ const SquareTable = ({ size, rowCol }: { size: number; rowCol: number }) => {
             />
           )
         }
-        if (i != 0 && j == 0) {
+        if (i !== 0 && j === 0) {
           cor = '#FF8CB8'
           value = i
           columns.push(
@@ -387,7 +395,7 @@ const SquareTable = ({ size, rowCol }: { size: number; rowCol: number }) => {
             />
           )
         }
-        if (i == 0 && j != 0) {
+        if (i === 0 && j !== 0) {
           cor = '#FF8CB8'
           value = j
           columns.push(
@@ -402,12 +410,12 @@ const SquareTable = ({ size, rowCol }: { size: number; rowCol: number }) => {
           )
         }
         if (
-          (j == rowCol || i == rowCol) &&
-          identidade == 'true' &&
-          i != 0 &&
-          j != 0
+          (j === rowCol || i === rowCol) &&
+          identidade === 'true' &&
+          i !== 0 &&
+          j !== 0
         ) {
-          if (i == rowCol) {
+          if (i === rowCol) {
             cor = '#87FF9A'
             value = j
             columns.push(
@@ -420,7 +428,7 @@ const SquareTable = ({ size, rowCol }: { size: number; rowCol: number }) => {
                 imageId={squareNumber}
               />
             )
-          } else if (j == rowCol) {
+          } else if (j === rowCol) {
             cor = '#87FF9A'
             value = i
             columns.push(
