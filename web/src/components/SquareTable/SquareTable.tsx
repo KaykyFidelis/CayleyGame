@@ -386,6 +386,7 @@ const SquareTable = ({ size, rowCol }) => {
             )
           }
         } else if (i != 0 && j != 0) {
+          value = 0
           columns.push(
             <Square
               cor={cor}
