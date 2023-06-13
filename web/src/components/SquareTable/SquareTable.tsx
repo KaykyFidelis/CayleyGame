@@ -128,7 +128,6 @@ function checaCancelamento(size: number) {
     }
     if (rows[i - 1].size !== size || columns[i - 1].size !== size) return false
   }
-  console.log(rows, columns)
   return true
 }
 
