@@ -1,5 +1,7 @@
 # README
 
+You can run this on netlify: cayley-game.netlify.app
+
 Welcome to [RedwoodJS](https://redwoodjs.com)!
 
 > **Prerequisites**
