@@ -11,7 +11,7 @@ const Square = ({
   imageId,
 }: {
   cor: string
-  padrao: any
+  padrao: string
   frutaAtual: string
   disabled?: boolean
   onClick: any

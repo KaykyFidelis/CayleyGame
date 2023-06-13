@@ -6,132 +6,158 @@ import { useParams } from '@redwoodjs/router'
 
 import Square from '../Square/Square'
 
-function getPermutacoes(array, size) {
-  const results = []
+function getPermutacoes(array: number[], tamanhoArray: number) {
+  const results: number[][] = []
 
-  function permutar(permutacaoAtual, elementosRestantes) {
-    if (permutacaoAtual.length === size) {
+  function permutar(permutacaoAtual: number[], elementosRestantes: number[]) {
+    if (permutacaoAtual.length === tamanhoArray) {
       results.push(permutacaoAtual)
       return
     }
 
-    for (let i = 0; i < elementosRestantes.length; i++) {
-      const proximaPermutacao = permutacaoAtual.concat(elementosRestantes[i])
-      const resto = elementosRestantes
-        .slice(0, i)
-        .concat(elementosRestantes.slice(i + 1))
+    elementosRestantes.forEach((elemento, indice) => {
+      const proximaPermutacao = [...permutacaoAtual, elemento]
+      const resto = elementosRestantes.filter((_, i) => i !== indice)
       permutar(proximaPermutacao, resto)
-    }
+    })
   }
 
   permutar([], array)
   return results
 }
 
-function checaIdentidade(tableSize: number) {
-  let rowSequence = true
-  let columnSequence = true
-  for (let i = 1; i <= tableSize; i++) {
-    rowSequence = true
-    columnSequence = true
-    for (let j = 1; j <= tableSize; j++) {
-      if (
-        !document
-          .getElementById('squareImage-' + (i * tableSize + j))
-          .src.endsWith(j + '.png')
-      ) {
-        rowSequence = false
+function checaIdentidade(tamanhoTabela: number) {
+  for (let i = 1; i <= tamanhoTabela; i++) {
+    let sequenciaLinhaCorreta = true
+    let sequenciaColunaCorreta = true
+
+    for (let j = 1; j <= tamanhoTabela; j++) {
+      const numeroIdFrutaLinha = i * tamanhoTabela + j
+      const numeroIdFrutaColuna = j * tamanhoTabela + i
+
+      const imagemFrutaLinha = document.getElementById(
+        'squareImage-' + numeroIdFrutaLinha
+      ) as HTMLImageElement
+      const imagemFrutaSrcLinha = imagemFrutaLinha.src
+
+      const imagemFrutaColuna = document.getElementById(
+        'squareImage-' + numeroIdFrutaColuna
+      ) as HTMLImageElement
+      const imagemFrutaSrcColuna = imagemFrutaColuna.src
+
+      if (!imagemFrutaSrcLinha.endsWith(j + '.png')) {
+        sequenciaLinhaCorreta = false
         break
       }
 
-      if (
-        !document
-          .getElementById('squareImage-' + (j * tableSize + i))
-          .src.endsWith(i - 1 + j + '.png')
-      ) {
-        columnSequence = false
+      if (!imagemFrutaSrcColuna.endsWith(i - 1 + j + '.png')) {
+        sequenciaColunaCorreta = false
         break
       }
     }
-    if (rowSequence && columnSequence) return i
+    if (sequenciaLinhaCorreta && sequenciaColunaCorreta) return i
   }
   return -1
 }
 
-function checaAssociatividade(tableSize: number) {
-  const frutas: number[] = []
-  for (let i = 1; i <= tableSize; i++) frutas.push(i)
+function checaAssociatividade(tamanhoTabela: number) {
+  const frutas = Array.from(
+    { length: tamanhoTabela },
+    (_, indice) => indice + 1
+  )
+  const permutacoes = getPermutacoes(frutas, 3)
 
-  const permutacoes: number[] = getPermutacoes(frutas, 3)
   for (const permutacao of permutacoes) {
-    const frutaA = permutacao[0]
-    const frutaB = permutacao[1]
-    const frutaC = permutacao[2]
+    const [frutaA, frutaB, frutaC] = permutacao
 
-    const resultadoAB: number = frutaA * tableSize + frutaB
-    const frutaABUrl: string = document.getElementById(
+    const resultadoAB: number = frutaA * tamanhoTabela + frutaB
+
+    const frutaABImagem = document.getElementById(
       'squareImage-' + resultadoAB
-    ).src
-    const frutaAB = parseInt(frutaABUrl.at(frutaABUrl.length - 5), 10)
-    const resultadoDireita: number = frutaAB * tableSize + frutaC
-    const frutaResultadoDireitaUrl = document.getElementById(
+    ) as HTMLImageElement
+    const frutaABSrc = frutaABImagem.src
+    const frutaAB = parseInt(frutaABSrc.at(frutaABSrc.length - 5), 10)
+
+    const resultadoDireita = frutaAB * tamanhoTabela + frutaC
+    const frutaResultadoDireitaImagem = document.getElementById(
       'squareImage-' + resultadoDireita
-    ).src
+    ) as HTMLImageElement
+    const frutaResultadoDireitaSrc = frutaResultadoDireitaImagem.src
 
-    const resultadoEsquerda: number = frutaC * tableSize + frutaAB
-    const frutaResultadoEsquerdaUrl = document.getElementById(
+    const resultadoEsquerda = frutaC * tamanhoTabela + frutaAB
+    const frutaResultadoEsquerdaImagem = document.getElementById(
       'squareImage-' + resultadoEsquerda
-    ).src
+    ) as HTMLImageElement
+    const frutaResultadoEsquerdaSrc = frutaResultadoEsquerdaImagem.src
 
-    if (frutaResultadoDireitaUrl !== frutaResultadoEsquerdaUrl) return false
+    if (frutaResultadoDireitaSrc !== frutaResultadoEsquerdaSrc) return false
   }
   return true
 }
 
-function checaInversos(size, frutaIdentidade) {
-  for (let i = 1; i <= size; i++) {
-    for (let j = 1; j <= size; j++) {
-      const frutaABUrl = document.getElementById(
-        'squareImage-' + (i * size + j)
-      ).src
-      const frutaAB = parseInt(frutaABUrl.at(frutaABUrl.length - 5))
+function checaInversos(tamanhoTabela: number, frutaIdentidade: number) {
+  for (let i = 1; i <= tamanhoTabela; i++) {
+    for (let j = 1; j <= tamanhoTabela; j++) {
+      const frutaABImagem = document.getElementById(
+        'squareImage-' + (i * tamanhoTabela + j)
+      ) as HTMLImageElement
+      const frutaABSrc = frutaABImagem.src
 
-      const frutaBAUrl = document.getElementById(
-        'squareImage-' + (j * size + i)
-      ).src
-      const frutaBA = parseInt(frutaBAUrl.at(frutaBAUrl.length - 5))
+      const frutaAB = parseInt(frutaABSrc.at(frutaABSrc.length - 5))
+
+      const frutaBAImagem = document.getElementById(
+        'squareImage-' + (j * tamanhoTabela + i)
+      ) as HTMLImageElement
+      const frutaBASrc = frutaBAImagem.src
+
+      const frutaBA = parseInt(frutaBASrc.at(frutaBASrc.length - 5))
+
       if (frutaAB === frutaBA && frutaAB === frutaIdentidade) break
-      else if (j == size) return false
+      else if (j === tamanhoTabela) return false
     }
   }
   return true
 }
 
-function checaCancelamento(size: number) {
-  const rows: Set<number>[] = []
-  const columns: Set<number>[] = []
+function checaCancelamento(tamanhoTabela: number) {
+  const linhas: Set<number>[] = []
+  const colunas: Set<number>[] = []
 
-  for (let i = 1; i <= size; i++) {
-    rows.push(new Set())
-    columns.push(new Set())
-    for (let j = 1; j <= size; j++) {
-      const frutaLinha = document.getElementById(
-        'squareImage-' + (i * size + j)
-      )
-      const frutaColuna = document.getElementById(
-        'squareImage-' + (j * size + i)
-      )
-      rows[i - 1].add(parseInt(frutaLinha.src.at(frutaLinha.src.length - 5)))
-      columns[i - 1].add(
-        parseInt(frutaColuna.src.at(frutaColuna.src.length - 5))
-      )
+  for (let i = 1; i <= tamanhoTabela; i++) {
+    const linha: Set<number> = new Set()
+    const coluna: Set<number> = new Set()
+
+    for (let j = 1; j <= tamanhoTabela; j++) {
+      const frutaLinhaImagem = document.getElementById(
+        'squareImage-' + (i * tamanhoTabela + j)
+      ) as HTMLImageElement
+      const frutaLinhaSrc = frutaLinhaImagem.src
+      const frutaLinha = parseInt(frutaLinhaSrc.at(frutaLinhaSrc.length - 5))
+
+      const frutaColunaImagem = document.getElementById(
+        'squareImage-' + (j * tamanhoTabela + i)
+      ) as HTMLImageElement
+      const frutaColunaSrc = frutaColunaImagem.src
+      const frutaColuna = parseInt(frutaColunaSrc.at(frutaColunaSrc.length - 5))
+
+      linha.add(frutaLinha)
+      coluna.add(frutaColuna)
     }
-    if (rows[i - 1].size !== size || columns[i - 1].size !== size) return false
+
+    if (
+      linha.size !== tamanhoTabela ||
+      coluna.size !== tamanhoTabela ||
+      linha.has(0) ||
+      coluna.has(0)
+    )
+      return false
+    linhas.push(linha)
+    colunas.push(coluna)
   }
   return true
 }
 
-const SquareTable = ({ size, rowCol }) => {
+const SquareTable = ({ size, rowCol }: { size: number; rowCol: number }) => {
   const [selectedImage, setSelectedImage] = useState('1')
   const { identidade } = useParams()
   const [frutaIdentidade, setFrutaIdentidade] = useState(
@@ -157,7 +183,7 @@ const SquareTable = ({ size, rowCol }) => {
       frutaIdentidade !== -1 &&
       temCancelamento
     ) {
-      alert('Você venceu!')
+      setTimeout(() => alert('Você venceu!'), 200)
     }
   }, [temAssociatividade, temInversos, frutaIdentidade, temCancelamento])
 
@@ -173,41 +199,25 @@ const SquareTable = ({ size, rowCol }) => {
       saida1 = `/frutas/${frutaIdentidade}.png`
       saida2 = 'é a identidade'
       percentual = 10
-      return (
-        <Row className="d-flex align-items-center">
-          <div className="d-flex align-items-center justify-content-center">
-            <Image
-              src={saida1}
-              alt="Atual"
-              style={{ width: `${percentual}%` }}
-            />
-            <h1 className="ml-1 text-white">{saida2}</h1>
-          </div>
-        </Row>
-      )
     } else {
       saida1 = '/not.png'
       saida2 = 'Ainda não há identidade definida'
       percentual = 7
-      return (
-        <Row className="d-flex align-items-center">
-          <div className="d-flex align-center justify-content-start ml-4 mt-2">
-            <Image
-              src={saida1}
-              alt="Atual"
-              style={{ width: `${percentual}%` }}
-            />
-            <h1 className="ml-1 text-white">{saida2}</h1>
-          </div>
-        </Row>
-      )
     }
+    return (
+      <Row className="d-flex align-items-center">
+        <div className="d-flex align-items-center justify-content-center">
+          <Image src={saida1} alt="Atual" style={{ width: `${percentual}%` }} />
+          <h1 className="ml-1 text-white">{saida2}</h1>
+        </div>
+      </Row>
+    )
   }
 
   const verificaAssociatividade = () => {
     let saida1
     let saida2
-    if (temAssociatividade === true) {
+    if (temAssociatividade) {
       saida1 = `/yes.png`
       saida2 = 'A tabela respeita a associatividade'
     } else {
@@ -366,7 +376,7 @@ const SquareTable = ({ size, rowCol }) => {
           columns.push(
             <Square
               cor={cor}
-              padrao={value}
+              padrao={value.toString()}
               frutaAtual={selectedImage}
               disabled
               onClick={handleSquareImageChange}
@@ -380,7 +390,7 @@ const SquareTable = ({ size, rowCol }) => {
           columns.push(
             <Square
               cor={cor}
-              padrao={value}
+              padrao={value.toString()}
               frutaAtual={selectedImage}
               disabled
               onClick={handleSquareImageChange}
@@ -400,7 +410,7 @@ const SquareTable = ({ size, rowCol }) => {
             columns.push(
               <Square
                 cor={cor}
-                padrao={value}
+                padrao={value.toString()}
                 frutaAtual={selectedImage}
                 disabled
                 onClick={handleSquareImageChange}
@@ -413,7 +423,7 @@ const SquareTable = ({ size, rowCol }) => {
             columns.push(
               <Square
                 cor={cor}
-                padrao={value}
+                padrao={value.toString()}
                 frutaAtual={selectedImage}
                 disabled
                 onClick={handleSquareImageChange}
@@ -426,7 +436,7 @@ const SquareTable = ({ size, rowCol }) => {
           columns.push(
             <Square
               cor={cor}
-              padrao={value}
+              padrao={value.toString()}
               frutaAtual={selectedImage}
               onClick={handleSquareImageChange}
               imageId={squareNumber}
