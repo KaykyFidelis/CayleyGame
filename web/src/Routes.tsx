@@ -15,9 +15,7 @@ const Routes = () => {
   return (
     <Router>
       <Set wrap={CayleyGamePageLayout}>
-        <Route path="/aneis-partida" page={AneisPartidaPage} name="aneisPartida" />
         <Route path="/grupos-partida" page={GruposPartidaPage} name="gruposPartida" />
-        <Route path="/aneis" page={AneisPage} name="aneis" />
         <Route path="/grupos" page={GruposPage} name="grupos" />
         <Route path="/" page={HomePage} name="home" />
       </Set>

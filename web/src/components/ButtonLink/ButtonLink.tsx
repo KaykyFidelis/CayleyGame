@@ -17,10 +17,11 @@ const ButtonLink = ({
         backgroundColor: '#F5BBD1',
         fontSize: '1.5rem',
         textTransform: 'capitalize',
+        justifyContent: 'center',
         borderRadius: '5px',
         color: 'white',
-        height: '100%',
         width: '90%',
+        height: '100%',
       }}
       href={route}
       variant="contained"

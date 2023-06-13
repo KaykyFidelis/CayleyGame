@@ -23,7 +23,7 @@ const GruposPartidaPage = ({ dificuldade }: { dificuldade: string }) => {
       <Container style={{ backgroundColor: '#749DF5' }} fluid>
         <SquareTable
           size={size}
-          rowCol={Math.floor(Math.random() * (5 - 1 + 1) + 1)}
+          rowCol={Math.floor(Math.random() * (size - 1 + 1) + 1)}
         />
       </Container>
     </>
