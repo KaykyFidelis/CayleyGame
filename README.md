@@ -1,6 +1,6 @@
 # README
 
-You can run this on netlify: [CayleyGameApp](cayley-game.netlify.app)
+You can run this on netlify: [CayleyGameApp](https://cayley-game.netlify.app/)
 
 Welcome to [RedwoodJS](https://redwoodjs.com)!
 
