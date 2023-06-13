@@ -50,17 +50,20 @@ const checaIdentidade = (tamanhoTabela: number): number => {
       ) as HTMLImageElement
       const imagemFrutaSrcColuna = imagemFrutaColuna.src
 
+      console.log(i, j, imagemFrutaSrcLinha, imagemFrutaSrcColuna)
       if (!imagemFrutaSrcLinha.endsWith(j + '.png')) {
         sequenciaLinhaCorreta = false
         break
       }
 
-      if (!imagemFrutaSrcColuna.endsWith(i - 1 + j + '.png')) {
+      if (!imagemFrutaSrcColuna.endsWith(j + '.png')) {
         sequenciaColunaCorreta = false
         break
       }
     }
-    if (sequenciaLinhaCorreta && sequenciaColunaCorreta) return i
+    if (sequenciaLinhaCorreta && sequenciaColunaCorreta) {
+      return i
+    }
   }
   return -1
 }
@@ -188,6 +191,7 @@ const SquareTable = ({ size, rowCol }: SquareTableProps) => {
   }
 
   useEffect(() => {
+    console.log(frutaIdentidade, checaIdentidade(size))
     if (
       temAssociatividade &&
       temInversos &&
