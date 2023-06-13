@@ -1,6 +1,5 @@
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container } from 'react-bootstrap'
 
-import { routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
 
 import LevelSelection from 'src/components/LevelSelection/LevelSelection'

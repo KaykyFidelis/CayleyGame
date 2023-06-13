@@ -111,7 +111,6 @@ function checaInversos(tamanhoTabela: number, frutaIdentidade: number) {
       const frutaBASrc = frutaBAImagem.src
 
       const frutaBA = parseInt(frutaBASrc.at(frutaBASrc.length - 5))
-
       if (frutaAB === frutaBA && frutaAB === frutaIdentidade) break
       else if (j === tamanhoTabela) return false
     }
@@ -166,6 +165,10 @@ const SquareTable = ({ size, rowCol }: { size: number; rowCol: number }) => {
   const [temAssociatividade, setAssociatividade] = useState(false)
   const [temInversos, setInversos] = useState(false)
   const [temCancelamento, setCancelamento] = useState(false)
+
+  useEffect(() => {
+    setInversos(checaInversos(size, checaIdentidade(size)))
+  }, [frutaIdentidade, size])
 
   const handleSquareImageChange = () => {
     if (identidade !== 'true') {

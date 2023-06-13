@@ -1,6 +1,7 @@
-import { routes } from '@redwoodjs/router'
-import { MetaTags } from '@redwoodjs/web'
 import { Container } from 'react-bootstrap'
+
+import { MetaTags } from '@redwoodjs/web'
+
 import LevelSelection from 'src/components/LevelSelection/LevelSelection'
 
 const AneisPage = () => {
@@ -8,7 +9,7 @@ const AneisPage = () => {
     <>
       <MetaTags title="Aneis" description="Aneis page" />
       <Container style={{ backgroundColor: '#749DF5' }} fluid>
-        <LevelSelection rota={'aneis'}/>
+        <LevelSelection rota={'aneis'} />
       </Container>
     </>
   )

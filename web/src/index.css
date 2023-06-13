@@ -12,3 +12,20 @@
  * END --- SETUP TAILWINDCSS EDIT
  */
 
+ .game-title {
+  color: white;
+  font-size: 3rem;
+  font-weight: 400;
+}
+
+@media (max-width: 768px) {
+  .game-title {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .game-title {
+    font-size: 1.5rem;
+  }
+}
