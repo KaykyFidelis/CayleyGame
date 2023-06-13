@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 
 import { Image } from 'react-bootstrap'
 
@@ -18,12 +18,10 @@ const Square = ({
   imageId: number
 }) => {
   const [selectedImage, setSelectedImage] = useState(`${padrao}`)
-  const imageRef = useRef(null)
 
-  const handleSquareClick = (frutaAtual) => {
-    setSelectedImage(frutaAtual)
-    onClick() // Invoke the onClick prop with the desired data
-  }
+  useEffect(() => {
+    onClick()
+  }, [selectedImage])
 
   return (
     <td style={{ backgroundColor: '#6187DA', width: '10%', height: '10%' }}>
@@ -37,12 +35,11 @@ const Square = ({
           backgroundColor: `${cor}`,
           borderRadius: '5%',
         }}
-        onClick={() => handleSquareClick(frutaAtual)}
+        onClick={() => setSelectedImage(frutaAtual)}
         disabled={disabled}
       >
         <Image
           id={'squareImage-' + imageId}
-          ref={imageRef}
           src={`/frutas/${selectedImage}.png`}
           alt="Atual"
           style={{ maxWidth: '65%', maxHeight: '65%' }}

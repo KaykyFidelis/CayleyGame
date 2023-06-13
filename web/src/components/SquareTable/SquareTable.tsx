@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import { Container, Table, Col, Row, Image } from 'react-bootstrap'
 
@@ -128,6 +128,7 @@ function checaCancelamento(size: number) {
     }
     if (rows[i - 1].size !== size || columns[i - 1].size !== size) return false
   }
+  console.log(rows, columns)
   return true
 }
 
@@ -143,22 +144,14 @@ const SquareTable = ({ size, rowCol }) => {
 
   const handleSquareImageChange = () => {
     if (identidade !== 'true') {
-      setTimeout(() => setFrutaIdentidade(checaIdentidade(size)), 200)
+      setFrutaIdentidade(checaIdentidade(size))
     }
+    setInversos(checaInversos(size, frutaIdentidade))
+    setAssociatividade(checaAssociatividade(size))
+    setCancelamento(checaCancelamento(size))
+  }
 
-    setTimeout(() => {
-      setInversos(checaInversos(size, frutaIdentidade))
-    }, 150)
-
-    setTimeout(() => {
-      setAssociatividade(checaAssociatividade(size))
-    }, 150)
-
-    setTimeout(() => {
-      setCancelamento(checaCancelamento(size))
-    }, 150)
-
-    console.log(temCancelamento)
+  useEffect(() => {
     if (
       temAssociatividade &&
       temInversos &&
@@ -167,7 +160,7 @@ const SquareTable = ({ size, rowCol }) => {
     ) {
       alert('Você venceu!')
     }
-  }
+  }, [temAssociatividade, temInversos, frutaIdentidade, temCancelamento])
 
   const handleImageClick = (imageName) => {
     setSelectedImage(imageName)
@@ -255,7 +248,7 @@ const SquareTable = ({ size, rowCol }) => {
   const verificaCancelamento = () => {
     let saida1
     let saida2
-    if (temCancelamento === true) {
+    if (temCancelamento) {
       saida1 = `/yes.png`
       saida2 = 'Não há frutas repetidos em uma direção'
     } else {
@@ -264,7 +257,7 @@ const SquareTable = ({ size, rowCol }) => {
     }
     return (
       <Row className="d-flex align-items-center">
-        <div className="d-flex align-items-center justify-content-start ml-4 mt-2 mb-3">
+        <div className="d-flex align-items-center justify-content-start mb-3 ml-4 mt-2">
           <Image src={saida1} alt="Atual" style={{ width: '7%' }} />
           <h1 className="ml-1 text-white">{saida2}</h1>
         </div>
