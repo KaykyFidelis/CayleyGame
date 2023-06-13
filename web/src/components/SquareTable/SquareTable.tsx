@@ -141,6 +141,93 @@ const SquareTable = ({ size, rowCol }) => {
     setSelectedImage(imageName)
   }
 
+  const verificaIdentidade = () => {
+    let saida1;
+    let saida2;
+    let percentual;
+    if (frutaIdentidade !== -1) {
+      saida1 = `/frutas/${frutaIdentidade}.png`;
+      saida2 = "é a identidade";
+      percentual = 10;
+      return (
+        <Row className="d-flex align-items-center">
+          <div className="d-flex align-items-center justify-content-center">
+            <Image
+              src={saida1}
+              alt="Atual"
+              style={{ width: `${percentual}%` }}
+            />
+            <h1 className="ml-1 text-white">{saida2}</h1>
+          </div>
+        </Row>
+      );
+    } else {
+      saida1 = "/not.png";
+      saida2 = "Ainda não há identidade definida";
+      percentual = 7;
+      return (
+        <Row className="d-flex align-items-center">
+          <div className="d-flex align-center justify-content-start mt-2 ml-8">
+            <Image
+              src={saida1}
+              alt="Atual"
+              style={{ width: `${percentual}%` }}
+            />
+            <h1 className="ml-1 text-white">{saida2}</h1>
+          </div>
+        </Row>
+      );
+    }
+  };
+
+  const verificaAssociatividade = () => {
+    let saida1;
+    let saida2;
+    if (temAssociatividade === true) {
+      saida1 = `/yes.png`;
+      saida2 = "A tabela respeita a associatividade";
+    } else {
+      saida1 = "/not.png";
+      saida2 = "A tabela não é associativa";
+    }
+    return (
+      <Row className="d-flex align-items-center">
+        <div className="d-flex align-items-center justify-content-start mt-2 ml-8">
+          <Image
+            src={saida1}
+            alt="Atual"
+            style={{ width: '7%' }}
+          />
+          <h1 className="ml-1 text-white">{saida2}</h1>
+        </div>
+      </Row>
+    );
+  }
+
+  const verificaInverso = () => {
+    let saida1;
+    let saida2;
+    if (temInversos === true) {
+      saida1 = `/yes.png`;
+      saida2 = "Os inversos obedecem à propriedade";
+    } else {
+      saida1 = "/not.png";
+      saida2 = "Nem todos os inversos estão corretos";
+    }
+    return (
+      <Row className="d-flex align-items-center">
+        <div className="d-flex align-items-center justify-content-start mt-2 ml-8">
+          <Image
+            src={saida1}
+            alt="Atual"
+            style={{ width: '7%' }}
+          />
+          <h1 className="ml-1 text-white">{saida2}</h1>
+        </div>
+      </Row>
+    );
+  }
+
   const renderImages = ({ size }) => {
     const images = []
     // Loop para gerar as imagens
@@ -364,6 +451,22 @@ const SquareTable = ({ size, rowCol }) => {
           />
         </Container>
         {renderImages({ size })}
+      </Container>
+      <Container
+        className="d-flex flex-column"
+        style={{
+          backgroundColor: '#6187DA',
+          width: '25%',
+          height: '25%',
+          borderRadius: '10px',
+        }}
+      >
+        <Row>
+          <h1 className="mt-3 mb-3 text-center text-white">Diagnóstico Atual:</h1>
+        </Row>
+        {verificaIdentidade()}
+        {verificaAssociatividade()}
+        {verificaInverso()}
       </Container>
     </div>
   )
