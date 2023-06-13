@@ -107,6 +107,30 @@ function checaInversos(size, frutaIdentidade) {
   return true
 }
 
+function checaCancelamento(size: number) {
+  const rows: Set<number>[] = []
+  const columns: Set<number>[] = []
+
+  for (let i = 1; i <= size; i++) {
+    rows.push(new Set())
+    columns.push(new Set())
+    for (let j = 1; j <= size; j++) {
+      const frutaLinha = document.getElementById(
+        'squareImage-' + (i * size + j)
+      )
+      const frutaColuna = document.getElementById(
+        'squareImage-' + (j * size + i)
+      )
+      rows[i - 1].add(parseInt(frutaLinha.src.at(frutaLinha.src.length - 5)))
+      columns[i - 1].add(
+        parseInt(frutaColuna.src.at(frutaColuna.src.length - 5))
+      )
+    }
+    if (rows[i - 1].size !== size || columns[i - 1].size !== size) return false
+  }
+  return true
+}
+
 const SquareTable = ({ size, rowCol }) => {
   const [selectedImage, setSelectedImage] = useState('1')
   const { identidade } = useParams()
@@ -115,24 +139,32 @@ const SquareTable = ({ size, rowCol }) => {
   )
   const [temAssociatividade, setAssociatividade] = useState(false)
   const [temInversos, setInversos] = useState(false)
+  const [temCancelamento, setCancelamento] = useState(false)
 
   const handleSquareImageChange = () => {
-    if (identidade != 'true') {
-      setTimeout(() => setFrutaIdentidade(checaIdentidade(size)), 250)
+    if (identidade !== 'true') {
+      setTimeout(() => setFrutaIdentidade(checaIdentidade(size)), 200)
     }
 
-    if (frutaIdentidade != -1) {
-      setTimeout(() => {
-        setInversos(checaInversos(size, frutaIdentidade))
-      }, 150)
+    setTimeout(() => {
+      setInversos(checaInversos(size, frutaIdentidade))
+    }, 150)
 
-      if (temInversos) {
-        setTimeout(() => {
-          setAssociatividade(checaAssociatividade(size))
-        }, 150)
-      }
-    }
-    if (temAssociatividade && temInversos) {
+    setTimeout(() => {
+      setAssociatividade(checaAssociatividade(size))
+    }, 150)
+
+    setTimeout(() => {
+      setCancelamento(checaCancelamento(size))
+    }, 150)
+
+    console.log(temCancelamento)
+    if (
+      temAssociatividade &&
+      temInversos &&
+      frutaIdentidade !== -1 &&
+      temCancelamento
+    ) {
       alert('Você venceu!')
     }
   }
@@ -142,13 +174,13 @@ const SquareTable = ({ size, rowCol }) => {
   }
 
   const verificaIdentidade = () => {
-    let saida1;
-    let saida2;
-    let percentual;
+    let saida1
+    let saida2
+    let percentual
     if (frutaIdentidade !== -1) {
-      saida1 = `/frutas/${frutaIdentidade}.png`;
-      saida2 = "é a identidade";
-      percentual = 10;
+      saida1 = `/frutas/${frutaIdentidade}.png`
+      saida2 = 'é a identidade'
+      percentual = 10
       return (
         <Row className="d-flex align-items-center">
           <div className="d-flex align-items-center justify-content-center">
@@ -160,14 +192,14 @@ const SquareTable = ({ size, rowCol }) => {
             <h1 className="ml-1 text-white">{saida2}</h1>
           </div>
         </Row>
-      );
+      )
     } else {
-      saida1 = "/not.png";
-      saida2 = "Ainda não há identidade definida";
-      percentual = 7;
+      saida1 = '/not.png'
+      saida2 = 'Ainda não há identidade definida'
+      percentual = 7
       return (
         <Row className="d-flex align-items-center">
-          <div className="d-flex align-center justify-content-start mt-2 ml-8">
+          <div className="d-flex align-center justify-content-start ml-8 mt-2">
             <Image
               src={saida1}
               alt="Atual"
@@ -176,56 +208,48 @@ const SquareTable = ({ size, rowCol }) => {
             <h1 className="ml-1 text-white">{saida2}</h1>
           </div>
         </Row>
-      );
+      )
     }
-  };
+  }
 
   const verificaAssociatividade = () => {
-    let saida1;
-    let saida2;
+    let saida1
+    let saida2
     if (temAssociatividade === true) {
-      saida1 = `/yes.png`;
-      saida2 = "A tabela respeita a associatividade";
+      saida1 = `/yes.png`
+      saida2 = 'A tabela respeita a associatividade'
     } else {
-      saida1 = "/not.png";
-      saida2 = "A tabela não é associativa";
+      saida1 = '/not.png'
+      saida2 = 'A tabela não é associativa'
     }
     return (
       <Row className="d-flex align-items-center">
-        <div className="d-flex align-items-center justify-content-start mt-2 ml-8">
-          <Image
-            src={saida1}
-            alt="Atual"
-            style={{ width: '7%' }}
-          />
+        <div className="d-flex align-items-center justify-content-start ml-8 mt-2">
+          <Image src={saida1} alt="Atual" style={{ width: '7%' }} />
           <h1 className="ml-1 text-white">{saida2}</h1>
         </div>
       </Row>
-    );
+    )
   }
 
   const verificaInverso = () => {
-    let saida1;
-    let saida2;
+    let saida1
+    let saida2
     if (temInversos === true) {
-      saida1 = `/yes.png`;
-      saida2 = "Os inversos obedecem à propriedade";
+      saida1 = `/yes.png`
+      saida2 = 'Os inversos obedecem à propriedade'
     } else {
-      saida1 = "/not.png";
-      saida2 = "Nem todos os inversos estão corretos";
+      saida1 = '/not.png'
+      saida2 = 'Nem todos os inversos estão corretos'
     }
     return (
       <Row className="d-flex align-items-center">
-        <div className="d-flex align-items-center justify-content-start mt-2 ml-8">
-          <Image
-            src={saida1}
-            alt="Atual"
-            style={{ width: '7%' }}
-          />
+        <div className="d-flex align-items-center justify-content-start ml-8 mt-2">
+          <Image src={saida1} alt="Atual" style={{ width: '7%' }} />
           <h1 className="ml-1 text-white">{saida2}</h1>
         </div>
       </Row>
-    );
+    )
   }
 
   const renderImages = ({ size }) => {
@@ -463,7 +487,9 @@ const SquareTable = ({ size, rowCol }) => {
         }}
       >
         <Row>
-          <h1 className="mt-3 mb-3 text-center text-white">Diagnóstico Atual:</h1>
+          <h1 className="mb-3 mt-3 text-center text-white">
+            Diagnóstico Atual:
+          </h1>
         </Row>
         {verificaIdentidade()}
         {verificaAssociatividade()}
