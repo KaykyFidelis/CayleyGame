@@ -1,14 +1,14 @@
 import { render } from '@redwoodjs/testing/web'
 
-import AneisPage from './AneisPage'
+import Square from './Square'
 
 //   Improve this test with help from the Redwood Testing Doc:
-//   https://redwoodjs.com/docs/testing#testing-pages-layouts
+//    https://redwoodjs.com/docs/testing#testing-components
 
-describe('AneisPage', () => {
+describe('Square', () => {
   it('renders successfully', () => {
     expect(() => {
-      render(<AneisPage />)
+      render(<Square />)
     }).not.toThrow()
   })
 })

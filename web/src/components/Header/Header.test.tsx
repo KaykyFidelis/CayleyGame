@@ -1,14 +1,14 @@
 import { render } from '@redwoodjs/testing/web'
 
-import ModeGamePage from './ModeGamePage'
+import Header from './Header'
 
 //   Improve this test with help from the Redwood Testing Doc:
-//   https://redwoodjs.com/docs/testing#testing-pages-layouts
+//    https://redwoodjs.com/docs/testing#testing-components
 
-describe('ModeGamePage', () => {
+describe('Header', () => {
   it('renders successfully', () => {
     expect(() => {
-      render(<ModeGamePage />)
+      render(<Header title={''} />)
     }).not.toThrow()
   })
 })

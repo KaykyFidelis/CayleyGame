@@ -1,39 +1,16 @@
-import { routes } from '@redwoodjs/router'
+import { Container } from 'react-bootstrap'
+
 import { MetaTags } from '@redwoodjs/web'
+
+import LevelSelection from 'src/components/LevelSelection/LevelSelection'
 
 const GruposPage = () => {
   return (
     <>
       <MetaTags title="Grupos" description="Grupos page" />
-      <div id="container">
-        <a href={routes.modeGame()}>
-          <h3 id="barra_superior">atividade - fmcc II</h3>
-        </a>
-        <img src="/logo_ufcg.png" alt="logo"></img>
-      </div>
-
-      <h1 id="titleSelectMode">Grupos</h1>
-
-      <div id="centroGrupos">
-        <h2 id="tituloJogo">Selecione o nível do jogo</h2>
-        <button id="botaoFacil" type="button">
-          <a href={routes.gruposPartida({ dificuldade: 'facil' })}>
-            <h2>Fácil</h2>
-          </a>
-        </button>
-        <button id="botaoMedio" type="button">
-          <a href={routes.gruposPartida({ dificuldade: 'medio' })}>
-            <h2>Médio</h2>
-          </a>
-        </button>
-        <button id="botaoDificil" type="button">
-          <a href={routes.gruposPartida({ dificuldade: 'dificil' })}>
-            <h2>Dificil</h2>
-          </a>
-        </button>
-      </div>
-      <img id="appleMangoGrupos" src="/apple_mango.png" alt="logo"></img>
-      <img id="strawberryGrupos" src="/strawberry.png" alt="logo"></img>
+      <Container style={{ backgroundColor: '#749DF5' }} fluid>
+        <LevelSelection rota={'grupos'} />
+      </Container>
     </>
   )
 }

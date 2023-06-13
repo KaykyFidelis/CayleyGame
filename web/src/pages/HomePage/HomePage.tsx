@@ -1,16 +1,16 @@
-import { Link, routes } from '@redwoodjs/router'
+import { Container } from 'react-bootstrap'
+
 import { MetaTags } from '@redwoodjs/web'
+
+import GameMenu from 'src/components/GameMenu'
 
 const HomePage = () => {
   return (
     <>
       <MetaTags title="Home" description="Home page" />
-
-      <h1>HomePage</h1>
-      <p>Hello World JS!</p>
-      <li>
-        <Link to={routes.modeGame()}>ModeGame</Link>
-      </li>
+      <Container style={{ backgroundColor: '#749DF5' }} fluid>
+        <GameMenu />
+      </Container>
     </>
   )
 }

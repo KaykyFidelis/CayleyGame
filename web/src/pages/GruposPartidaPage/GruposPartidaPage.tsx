@@ -1,74 +1,33 @@
-import { routes } from '@redwoodjs/router'
+import { Container } from 'react-bootstrap'
+
 import { MetaTags } from '@redwoodjs/web'
 
+import SquareTable from 'src/components/SquareTable/SquareTable'
+
 const GruposPartidaPage = ({ dificuldade }: { dificuldade: string }) => {
-  if (dificuldade === 'facil') {
-    return (
-      <>
-        <MetaTags title="GruposPartida" description="GruposPartida page" />
-
-        <div id="container">
-          <a href={routes.modeGame()}>
-            <h3 id="barra_superior">atividade - fmcc II</h3>
-          </a>
-          <img src="/logo_ufcg.png" alt="logo"></img>
-        </div>
-
-        <div id="centro">
-          <h1 id="tituloJogo">CayleyGame</h1>
-          <h3 id="temporarioRemoverIndexCss">
-            Tu escolheu o nível {dificuldade} pow
-          </h3>
-        </div>
-        <img id="apple_mango" src="/apple_mango.png" alt="logo"></img>
-        <img id="strawberry" src="/strawberry.png" alt="logo"></img>
-      </>
-    )
-  } else if (dificuldade == 'medio') {
-    return (
-      <>
-        <MetaTags title="GruposPartida" description="GruposPartida page" />
-
-        <div id="container">
-          <a href={routes.modeGame()}>
-            <h3 id="barra_superior">atividade - fmcc II</h3>
-          </a>
-          <img src="/logo_ufcg.png" alt="logo"></img>
-        </div>
-
-        <div id="centro">
-          <h1 id="tituloJogo">CayleyGame</h1>
-          <h3 id="temporarioRemoverIndexCss">
-            Tu escolheu o nível {dificuldade} pow
-          </h3>
-        </div>
-        <img id="apple_mango" src="/apple_mango.png" alt="logo"></img>
-        <img id="strawberry" src="/strawberry.png" alt="logo"></img>
-      </>
-    )
-  } else {
-    return (
-      <>
-        <MetaTags title="GruposPartida" description="GruposPartida page" />
-
-        <div id="container">
-          <a href={routes.modeGame()}>
-            <h3 id="barra_superior">atividade - fmcc II</h3>
-          </a>
-          <img src="/logo_ufcg.png" alt="logo"></img>
-        </div>
-
-        <div id="centro">
-          <h1 id="tituloJogo">CayleyGame</h1>
-          <h3 id="temporarioRemoverIndexCss">
-            Tu escolheu o nível {dificuldade} pow
-          </h3>
-        </div>
-        <img id="apple_mango" src="/apple_mango.png" alt="logo"></img>
-        <img id="strawberry" src="/strawberry.png" alt="logo"></img>
-      </>
-    )
+  let size = 0
+  switch (dificuldade) {
+    case 'facil':
+      size = 5
+      break
+    case 'medio':
+      size = 7
+      break
+    case 'dificil':
+      size = 9
+      break
   }
+  return (
+    <>
+      <MetaTags title="GruposPartida" description="GruposPartida page" />
+      <Container style={{ backgroundColor: '#749DF5' }} fluid>
+        <SquareTable
+          size={size}
+          rowCol={Math.floor(Math.random() * (size - 1 + 1) + 1)}
+        />
+      </Container>
+    </>
+  )
 }
 
 export default GruposPartidaPage
