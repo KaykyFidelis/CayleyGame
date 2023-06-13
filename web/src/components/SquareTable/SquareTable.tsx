@@ -199,7 +199,7 @@ const SquareTable = ({ size, rowCol }) => {
       percentual = 7
       return (
         <Row className="d-flex align-items-center">
-          <div className="d-flex align-center justify-content-start ml-8 mt-2">
+          <div className="d-flex align-center justify-content-start ml-4 mt-2">
             <Image
               src={saida1}
               alt="Atual"
@@ -224,7 +224,7 @@ const SquareTable = ({ size, rowCol }) => {
     }
     return (
       <Row className="d-flex align-items-center">
-        <div className="d-flex align-items-center justify-content-start ml-8 mt-2">
+        <div className="d-flex align-items-center justify-content-start ml-4 mt-2">
           <Image src={saida1} alt="Atual" style={{ width: '7%' }} />
           <h1 className="ml-1 text-white">{saida2}</h1>
         </div>
@@ -244,7 +244,27 @@ const SquareTable = ({ size, rowCol }) => {
     }
     return (
       <Row className="d-flex align-items-center">
-        <div className="d-flex align-items-center justify-content-start ml-8 mt-2">
+        <div className="d-flex align-items-center justify-content-start ml-4 mt-2">
+          <Image src={saida1} alt="Atual" style={{ width: '7%' }} />
+          <h1 className="ml-1 text-white">{saida2}</h1>
+        </div>
+      </Row>
+    )
+  }
+
+  const verificaCancelamento = () => {
+    let saida1
+    let saida2
+    if (temCancelamento === true) {
+      saida1 = `/yes.png`
+      saida2 = 'Não há frutas repetidos em uma direção'
+    } else {
+      saida1 = '/not.png'
+      saida2 = 'Há frutas repetidas/vazios em uma direção'
+    }
+    return (
+      <Row className="d-flex align-items-center">
+        <div className="d-flex align-items-center justify-content-start ml-4 mt-2 mb-3">
           <Image src={saida1} alt="Atual" style={{ width: '7%' }} />
           <h1 className="ml-1 text-white">{saida2}</h1>
         </div>
@@ -482,7 +502,6 @@ const SquareTable = ({ size, rowCol }) => {
         style={{
           backgroundColor: '#6187DA',
           width: '25%',
-          height: '25%',
           borderRadius: '10px',
         }}
       >
@@ -494,6 +513,7 @@ const SquareTable = ({ size, rowCol }) => {
         {verificaIdentidade()}
         {verificaAssociatividade()}
         {verificaInverso()}
+        {verificaCancelamento()}
       </Container>
     </div>
   )
