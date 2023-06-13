@@ -19,9 +19,6 @@ const GameMenu = () => {
           <Col className="d-flex align-items-center justify-content-center w-100 h-25">
             <ButtonLink route={routes.grupos()} value="Grupos" className={"d-flex align-items-center justify-content-center"}/>
           </Col>
-          <Col className="d-flex align-items-center justify-content-center w-100 h-25">
-            <ButtonLink route={routes.aneis()} value="Anéis" className={"d-flex align-items-center justify-content-center"}/>
-          </Col>
         </div>
       </Container>
     </div>
